@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "779494709970",
+    "project_id": "sdm_academy_app",
+    "storage_bucket": "sdm_academy_app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779494709970:android:9d50cd9b10a8a83a7eeb0b",
+        "android_client_info": {
+          "package_name": "com.workineo.sdmacademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuTZDC_-VjGmqf9d6W9MvX-dJm-VU0Nl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

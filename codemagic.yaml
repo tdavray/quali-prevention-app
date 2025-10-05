@@ -1,0 +1,112 @@
+workflows:
+  # ─── Build Both Android & iOS ─────────────────────────────────────────────────
+  flutter_build_all:
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: iOS Pod repo update & install
+        script: |
+          cd ios
+          pod repo update
+          pod install --repo-update
+          cd ..
+
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+
+      - name: Build iOS
+        script: |
+          flutter build ios --release --no-codesign
+
+    artifacts:
+      - build/app/outputs/**/*.apk
+      - build/ios/ipa/*.ipa
+
+  # ─── Build Android Only ───────────────────────────────────────────────────────
+  flutter_build_android_only:
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+
+    artifacts:
+      - build/app/outputs/**/*.apk
+
+  # ─── Build iOS Only ───────────────────────────────────────────────────────────
+  flutter_build_ios_only:
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: iOS Pod repo update & install
+        script: |
+          cd ios
+          pod repo update
+          pod install --repo-update
+          cd ..
+
+      - name: Build iOS
+        script: |
+          flutter build ios --release --no-codesign
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+
+  # ─── Build iOS Simulator App for Appetize ─────────────────────────────────────
+  flutter_build_ios_simulator:
+    name: Flutter iOS Simulator Build
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios
+          pod install
+          cd ..
+
+      - name: Build iOS app for simulator using xcodebuild
+        script: |
+          xcodebuild build \
+            -workspace ios/Runner.xcworkspace \
+            -scheme Runner \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.4' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            -derivedDataPath build/ios_simulator
+
+      - name: Package Runner.app
+        script: |
+          cd build/ios_simulator/Build/Products/Debug-iphonesimulator
+          zip -r RunnerSimulator.zip Runner.app
+
+    artifacts:
+      - build/ios_simulator/Build/Products/Debug-iphonesimulator/RunnerSimulator.zip
