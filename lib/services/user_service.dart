@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:sdm_academy_app/common/helper.dart';
-import 'package:sdm_academy_app/common/model/client_model.dart';
-import 'package:sdm_academy_app/common/model/user_model.dart';
-import 'package:sdm_academy_app/common/model/user_network.dart';
+import 'package:quali_prevention_app/common/helper.dart';
+import 'package:quali_prevention_app/common/model/client_model.dart';
+import 'package:quali_prevention_app/common/model/user_model.dart';
+import 'package:quali_prevention_app/common/model/user_network.dart';
 
 class UserService {
   static const String baseUrl = 'https://crm.mybeeacademy-sdm.fr';

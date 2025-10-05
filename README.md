@@ -1,6 +1,6 @@
-# sdm_academy_app
+# quali_prevention_app
 
-SDM Academy - Application de suivi
+Quali prévention - Application de suivi
 
 ## Getting Started
 

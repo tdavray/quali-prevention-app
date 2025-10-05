@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:sdm_academy_app/common/style.dart';
-import 'package:sdm_academy_app/services/auth_service.dart';
-import 'package:sdm_academy_app/ui/auth/sign_in_widget.dart';
-import 'package:sdm_academy_app/ui/auth/sign_up_widget.dart';
-import 'package:sdm_academy_app/ui/main/2_commissions/commission_detail_page.dart';
-import 'package:sdm_academy_app/ui/main/4_news/news_detail_page.dart';
-import 'package:sdm_academy_app/ui/main/5_products/product_detail_page.dart';
-import 'package:sdm_academy_app/ui/main/navigation_page.dart';
+import 'package:quali_prevention_app/common/style.dart';
+import 'package:quali_prevention_app/services/auth_service.dart';
+import 'package:quali_prevention_app/ui/auth/sign_in_widget.dart';
+import 'package:quali_prevention_app/ui/auth/sign_up_widget.dart';
+import 'package:quali_prevention_app/ui/main/2_commissions/commission_detail_page.dart';
+import 'package:quali_prevention_app/ui/main/4_news/news_detail_page.dart';
+import 'package:quali_prevention_app/ui/main/5_products/product_detail_page.dart';
+import 'package:quali_prevention_app/ui/main/navigation_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -28,20 +28,20 @@ void main() async {
 // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.Notifications.requestPermission(true);
 
-  runApp(SDMAcademyApp(initialRoute: initialRoute));
+  runApp(QualiPreventionApp(initialRoute: initialRoute));
 }
 
-class SDMAcademyApp extends StatelessWidget {
+class QualiPreventionApp extends StatelessWidget {
   final String initialRoute;
 
-  const SDMAcademyApp({super.key, required this.initialRoute});
+  const QualiPreventionApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: kTheme,
-      title: 'SDM Academy',
+      title: 'Quali prévention',
       initialRoute: initialRoute,
       routes: {
         '/sign_in': (context) => const SignInWidget(),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sdm_academy_app/common/style.dart';
-import 'package:sdm_academy_app/services/show_form_service.dart';
-import 'package:sdm_academy_app/ui/main/1_home/home_page.dart';
-import 'package:sdm_academy_app/ui/main/2_commissions/commissions_page.dart';
-import 'package:sdm_academy_app/ui/main/3_prospect/new_prospect_page.dart';
-import 'package:sdm_academy_app/ui/main/4_news/news_page.dart';
-import 'package:sdm_academy_app/ui/main/5_products/products_page.dart';
+import 'package:quali_prevention_app/common/style.dart';
+import 'package:quali_prevention_app/services/show_form_service.dart';
+import 'package:quali_prevention_app/ui/main/1_home/home_page.dart';
+import 'package:quali_prevention_app/ui/main/2_commissions/commissions_page.dart';
+import 'package:quali_prevention_app/ui/main/3_prospect/new_prospect_page.dart';
+import 'package:quali_prevention_app/ui/main/4_news/news_page.dart';
+import 'package:quali_prevention_app/ui/main/5_products/products_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationPage extends StatefulWidget {

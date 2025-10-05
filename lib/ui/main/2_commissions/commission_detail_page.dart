@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sdm_academy_app/common/helper.dart';
-import 'package:sdm_academy_app/common/model/client_model.dart';
-import 'package:sdm_academy_app/common/style.dart';
-import 'package:sdm_academy_app/global_widgets/custom_app_bar.dart';
-import 'package:sdm_academy_app/services/user_service.dart';
+import 'package:quali_prevention_app/common/helper.dart';
+import 'package:quali_prevention_app/common/model/client_model.dart';
+import 'package:quali_prevention_app/common/style.dart';
+import 'package:quali_prevention_app/global_widgets/custom_app_bar.dart';
+import 'package:quali_prevention_app/services/user_service.dart';
 
 class CommissionDetailPage extends StatefulWidget {
   const CommissionDetailPage({super.key});

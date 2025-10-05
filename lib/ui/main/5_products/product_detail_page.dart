@@ -2,10 +2,10 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sdm_academy_app/common/model/product_model.dart';
-import 'package:sdm_academy_app/common/style.dart';
-import 'package:sdm_academy_app/global_widgets/custom_app_bar.dart';
-import 'package:sdm_academy_app/services/product_service.dart';
+import 'package:quali_prevention_app/common/model/product_model.dart';
+import 'package:quali_prevention_app/common/style.dart';
+import 'package:quali_prevention_app/global_widgets/custom_app_bar.dart';
+import 'package:quali_prevention_app/services/product_service.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key});

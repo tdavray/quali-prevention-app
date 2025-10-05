@@ -1,6 +1,6 @@
 {
-    "name": "sdm_academy_app",
-    "short_name": "sdm_academy_app",
+    "name": "quali_prevention_app",
+    "short_name": "Quali prévention",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

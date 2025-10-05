@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sdm_academy_app/common/model/prospect_model.dart';
-import 'package:sdm_academy_app/common/style.dart';
-import 'package:sdm_academy_app/global_widgets/custom_app_bar.dart';
-import 'package:sdm_academy_app/global_widgets/custom_text_button.dart';
-import 'package:sdm_academy_app/global_widgets/custom_text_field.dart';
-import 'package:sdm_academy_app/services/prospect_service.dart';
+import 'package:quali_prevention_app/common/model/prospect_model.dart';
+import 'package:quali_prevention_app/common/style.dart';
+import 'package:quali_prevention_app/global_widgets/custom_app_bar.dart';
+import 'package:quali_prevention_app/global_widgets/custom_text_button.dart';
+import 'package:quali_prevention_app/global_widgets/custom_text_field.dart';
+import 'package:quali_prevention_app/services/prospect_service.dart';
 
 class NewProspectPage extends StatefulWidget {
   const NewProspectPage({super.key});
