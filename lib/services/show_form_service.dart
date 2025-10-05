@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ShowForm {
-  static const String baseUrl = 'https://crm.mybeeacademy-sdm.fr';
+  static const String baseUrl = 'https://crm.quali-prevention.fr';
   final _storage = const FlutterSecureStorage();
 
   Future<bool> getShowForm() async {

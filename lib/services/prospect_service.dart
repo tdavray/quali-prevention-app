@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:quali_prevention_app/common/model/prospect_model.dart';
 
 class ProspectService {
-  static const String baseUrl = 'https://crm.mybeeacademy-sdm.fr';
+  static const String baseUrl = 'https://crm.quali-prevention.fr';
   final _storage = const FlutterSecureStorage();
 
   // Méthode pour créer un nouveau prospect

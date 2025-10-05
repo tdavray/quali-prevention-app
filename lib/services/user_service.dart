@@ -8,7 +8,7 @@ import 'package:quali_prevention_app/common/model/user_model.dart';
 import 'package:quali_prevention_app/common/model/user_network.dart';
 
 class UserService {
-  static const String baseUrl = 'https://crm.mybeeacademy-sdm.fr';
+  static const String baseUrl = 'https://crm.quali-prevention.fr';
   final _storage = const FlutterSecureStorage();
 
   Future<User?> getUserProfile() async {

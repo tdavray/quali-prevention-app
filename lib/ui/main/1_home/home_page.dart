@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                               CircleAvatar(
                                 backgroundImage: user?.picture != null
                                     ? NetworkImage(
-                                        'https://crm.mybeeacademy-sdm.fr${user?.picture}')
+                                        'https://crm.quali-prevention.fr${user?.picture}')
                                     : const AssetImage(
                                         'assets/placeholder-white.png'),
                                 backgroundColor: white,
@@ -265,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                                     child: article?.image != null &&
                                             article!.image.isNotEmpty
                                         ? Image.network(
-                                            'https://crm.mybeeacademy-sdm.fr${article!.image}',
+                                            'https://crm.quali-prevention.fr${article!.image}',
                                             fit: BoxFit.cover,
                                           )
                                         : Image.asset(

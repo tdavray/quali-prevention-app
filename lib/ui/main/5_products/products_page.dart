@@ -94,7 +94,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                         (product.icon != null &&
                                                 product.icon!.isNotEmpty)
                                             ? Image.network(
-                                                'https://crm.mybeeacademy-sdm.fr${product.icon}',
+                                                'https://crm.quali-prevention.fr${product.icon}',
                                                 alignment: Alignment.centerLeft,
                                                 width: 50,
                                                 height: 50,

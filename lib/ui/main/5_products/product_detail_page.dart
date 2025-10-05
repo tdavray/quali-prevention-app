@@ -161,7 +161,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.mybeeacademy-sdm.fr${product?.imageFonctionnement}',
+                                      'https://crm.quali-prevention.fr${product?.imageFonctionnement}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -235,7 +235,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.mybeeacademy-sdm.fr${product?.imageReferences}',
+                                      'https://crm.quali-prevention.fr${product?.imageReferences}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -309,7 +309,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.mybeeacademy-sdm.fr${product?.imagePrix}',
+                                      'https://crm.quali-prevention.fr${product?.imagePrix}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -383,7 +383,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.mybeeacademy-sdm.fr${product?.imageArguments}',
+                                      'https://crm.quali-prevention.fr${product?.imageArguments}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),

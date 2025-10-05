@@ -665,7 +665,7 @@ class _CommissionsPageState extends State<CommissionsPage>
                                 children: [
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        'https://crm.mybeeacademy-sdm.fr${client.picture}'),
+                                        'https://crm.quali-prevention.fr${client.picture}'),
                                     backgroundColor: grey,
                                     radius: 25,
                                   ),

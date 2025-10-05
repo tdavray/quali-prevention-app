@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:quali_prevention_app/common/model/product_model.dart';
 
 class ProductService {
-  static const String baseUrl = 'https://crm.mybeeacademy-sdm.fr';
+  static const String baseUrl = 'https://crm.quali-prevention.fr';
   final _storage = const FlutterSecureStorage();
 
   Future<List<Product>?> getAllProducts() async {

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:quali_prevention_app/common/model/news_model.dart';
 
 class NewsService {
-  static const String baseUrl = 'https://crm.mybeeacademy-sdm.fr';
+  static const String baseUrl = 'https://crm.quali-prevention.fr';
   final _storage = const FlutterSecureStorage();
 
   Future<List<News>?> getNewsArticles({int page = 1, int perPage = 4}) async {

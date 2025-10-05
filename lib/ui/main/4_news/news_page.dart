@@ -37,7 +37,7 @@ class _NewsPageState extends State<NewsPage> {
       perPage: 4,
     );
 
-    if (newArticles!.isNotEmpty) {
+    if (newArticles != null && newArticles.isNotEmpty) {
       // Incrémente currentPage d'abord
       currentPage++;
       setState(() {
@@ -120,7 +120,7 @@ class _NewsPageState extends State<NewsPage> {
                                             borderRadius:
                                                 BorderRadius.circular(28),
                                             child: Image.network(
-                                              'https://crm.mybeeacademy-sdm.fr${article.image}',
+                                              'https://crm.quali-prevention.fr${article.image}',
                                               fit: BoxFit.cover,
                                             ),
                                           ),

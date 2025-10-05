@@ -100,7 +100,7 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                             backgroundImage: client?.picture != null &&
                                     client!.picture.isNotEmpty
                                 ? NetworkImage(
-                                    'https://crm.mybeeacademy-sdm.fr${client!.picture}')
+                                    'https://crm.quali-prevention.fr${client!.picture}')
                                 : const AssetImage(
                                         'assets/placeholder-white.png')
                                     as ImageProvider,
