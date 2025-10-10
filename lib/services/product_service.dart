@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:quali_prevention_app/common/constant.dart';
 import 'package:quali_prevention_app/common/model/product_model.dart';
 
 class ProductService {
-  static const String baseUrl = 'https://crm.quali-prevention.fr';
+  static const String baseUrl = AppConstants.apiBaseUrl;
   final _storage = const FlutterSecureStorage();
 
   Future<List<Product>?> getAllProducts() async {

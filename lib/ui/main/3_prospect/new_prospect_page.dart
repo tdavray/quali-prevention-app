@@ -454,7 +454,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     Flexible(
                       flex: 3,
                       child: Text(
-                        'Cette personne m’a autorisé à communiquer ses informations personnelles auprès de SDM Academy',
+                        'Cette personne m’a autorisé à communiquer ses informations personnelles auprès de Quali Prévention',
                         style: GoogleFonts.poppins(
                           color: darkGrey,
                           fontSize: 16,
@@ -464,7 +464,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     ),
                     Flexible(
                       child: Switch(
-                        activeColor: const Color(0xff7FAF00),
+                        activeThumbColor: const Color(0xff7FAF00),
                         activeTrackColor: const Color(0xff7FAF00),
                         overlayColor:
                             WidgetStateProperty.all(const Color(0xff7FAF00)),

@@ -47,6 +47,15 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
+  ImageProvider<Object> _resolveUserAvatar() {
+    final picture = user?.picture ?? '';
+    if (picture.isNotEmpty) {
+      return NetworkImage(picture) as ImageProvider<Object>;
+    }
+    return const AssetImage('assets/placeholder-white.png')
+        as ImageProvider<Object>;
+  }
+
   void logout(BuildContext context) async {
     AuthService authService = AuthService();
     await authService.logout();
@@ -93,11 +102,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: user?.picture != null
-                                    ? NetworkImage(
-                                        'https://crm.quali-prevention.fr${user?.picture}')
-                                    : const AssetImage(
-                                        'assets/placeholder-white.png'),
+                                backgroundImage: _resolveUserAvatar(),
                                 backgroundColor: white,
                                 radius: 25,
                               ),
@@ -265,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                                     child: article?.image != null &&
                                             article!.image.isNotEmpty
                                         ? Image.network(
-                                            'https://crm.quali-prevention.fr${article!.image}',
+                                            article!.image,
                                             fit: BoxFit.cover,
                                           )
                                         : Image.asset(

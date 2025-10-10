@@ -143,7 +143,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 } else {
                   final Uri emailLaunchUri = Uri(
                     scheme: 'mailto',
-                    path: 'contact@mybeeacademy-sdm.fr',
+                    path: 'contact@quali-prevention.fr',
                   );
 
                   if (await canLaunchUrl(emailLaunchUri)) {

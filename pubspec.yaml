@@ -105,11 +105,11 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon-logo-sdm.png"
+  image_path: "assets/icon-logo-quali.png"
 
 flutter_native_splash:
   color: "#ffffff" # Couleur de fond du splash screen
-  image: assets/text-logo-sdm.png # Chemin de l'image à utiliser
+  image: assets/text-logo-quali.png # Chemin de l'image à utiliser
   android: true # Activer pour Android
   ios: true # Activer pour iOS
   web: false # Désactiver pour le web

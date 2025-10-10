@@ -1,5 +1,1 @@
-package com.workineo.sdmacademy
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity()
+// Deprecated stub retained intentionally; new entry point in com.opace.qualiprevention.MainActivity.

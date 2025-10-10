@@ -12,7 +12,7 @@
         </intent>
     </queries>
     <application
-        android:label="SDM Academy"
+        android:label="Quali Prévention"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

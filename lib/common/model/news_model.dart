@@ -1,3 +1,5 @@
+import 'package:quali_prevention_app/common/constant.dart';
+
 class News {
   final int id;
   final String title;
@@ -18,14 +20,33 @@ class News {
   });
 
   factory News.fromJson(Map<String, dynamic> json) {
+    String resolveImagePath(dynamic rawPath) {
+      final path = (rawPath ?? '').toString();
+      if (path.isEmpty) {
+        return '';
+      }
+
+      final uri = Uri.tryParse(path);
+      if (uri != null && uri.hasScheme) {
+        return path;
+      }
+
+      final baseUri = Uri.parse(AppConstants.apiBaseUrl);
+      return baseUri.resolve(path).toString();
+    }
+
     return News(
-      id: json['id'],
-      title: json['title'],
-      image: json['image'],
-      description: json['description'] ?? '',
-      shortDescription: json['short_description'] ?? '',
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      id: json['id'] is int
+          ? json['id'] as int
+          : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
+      title: (json['title'] ?? '').toString(),
+      image: resolveImagePath(json['image']),
+      description: (json['description'] ?? '').toString(),
+      shortDescription: (json['short_description'] ?? '').toString(),
+      createdAt: DateTime.tryParse(json['created_at']?.toString() ?? '') ??
+          DateTime.fromMillisecondsSinceEpoch(0),
+      updatedAt: DateTime.tryParse(json['updated_at']?.toString() ?? '') ??
+          DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
 }

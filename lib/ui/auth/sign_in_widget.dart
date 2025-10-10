@@ -41,7 +41,11 @@ class _SignInWidgetState extends State<SignInWidget> {
     return emailRegex.hasMatch(email);
   }
 
-  void _login() async {
+  Future<void> _login() async {
+    if (isLoading) {
+      return;
+    }
+
     setState(() {
       isLoading = true;
       errorMessage = null;
@@ -51,9 +55,9 @@ class _SignInWidgetState extends State<SignInWidget> {
     if (!_isValidEmail(emailController.text)) {
       setState(() {
         isLoading = false;
+        errorMessage = 'Le format de l\'adresse e-mail est invalide';
       });
 
-      // Affichage d'un toast si le format de l'email est invalide
       await Fluttertoast.showToast(
         msg: 'Le format de l\'adresse e-mail est invalide',
         toastLength: Toast.LENGTH_LONG,
@@ -66,26 +70,56 @@ class _SignInWidgetState extends State<SignInWidget> {
       return;
     }
 
-    AuthService authService = AuthService();
-    String? token = await authService.getAccessToken(
-      emailController.text,
-      passwordController.text,
-    );
+    final authService = AuthService();
 
-    setState(() {
-      isLoading = false;
-    });
+    try {
+      final token = await authService.getAccessToken(
+        emailController.text,
+        passwordController.text,
+      );
 
-    print('Token: $token');
+      if (!mounted) {
+        return;
+      }
 
-    // Si la connexion réussit, redirection vers /home
-    if (token != null) {
-      // Si la connexion réussit, redirection vers /home
+      if (token == null) {
+        setState(() {
+          isLoading = false;
+          errorMessage =
+              'Identifiants incorrects. Vérifiez votre e-mail et votre mot de passe.';
+        });
+
+        await Fluttertoast.showToast(
+          msg:
+              'Identifiants incorrects. Vérifiez votre e-mail et votre mot de passe.',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 18.0,
+        );
+        return;
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+
       Navigator.pushReplacementNamed(context, '/home');
-    } else {
-      // Affichage d'un toast si les identifiants sont incorrects
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        isLoading = false;
+        errorMessage =
+            'Impossible de se connecter pour le moment. Veuillez réessayer.';
+      });
+
       await Fluttertoast.showToast(
-        msg: 'Adresse e-mail ou mot de passe incorrect',
+        msg: 'Impossible de se connecter pour le moment. Veuillez réessayer.',
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 3,

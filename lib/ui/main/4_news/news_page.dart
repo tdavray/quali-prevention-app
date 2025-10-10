@@ -119,10 +119,15 @@ class _NewsPageState extends State<NewsPage> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(28),
-                                            child: Image.network(
-                                              'https://crm.quali-prevention.fr${article.image}',
-                                              fit: BoxFit.cover,
-                                            ),
+                                            child: article.image.isNotEmpty
+                                                ? Image.network(
+                                                    article.image,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.asset(
+                                                    'assets/placeholder-white.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
                                           ),
                                         ),
                                         Expanded(

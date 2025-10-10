@@ -1,0 +1,5 @@
+package com.opace.qualiprevention
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()

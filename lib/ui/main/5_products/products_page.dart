@@ -91,16 +91,15 @@ class _ProductsPageState extends State<ProductsPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        (product.icon != null &&
-                                                product.icon!.isNotEmpty)
+          (product.icon.isNotEmpty)
                                             ? Image.network(
-                                                'https://crm.quali-prevention.fr${product.icon}',
+            product.icon,
                                                 alignment: Alignment.centerLeft,
                                                 width: 50,
                                                 height: 50,
                                               )
                                             : Image.asset(
-                                                'assets/icon-logo-sdm.png',
+                                                'assets/icon-logo-quali.png',
                                                 width: 50,
                                                 height: 50,
                                               ),

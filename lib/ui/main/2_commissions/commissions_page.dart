@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quali_prevention_app/common/constant.dart';
 import 'package:quali_prevention_app/common/helper.dart';
 import 'package:quali_prevention_app/common/model/client_model.dart';
 import 'package:quali_prevention_app/common/model/user_network.dart';
@@ -665,7 +666,7 @@ class _CommissionsPageState extends State<CommissionsPage>
                                 children: [
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        'https://crm.quali-prevention.fr${client.picture}'),
+                                        '${AppConstants.apiBaseUrl}${client.picture}'),
                                     backgroundColor: grey,
                                     radius: 25,
                                   ),

@@ -1,3 +1,5 @@
+import 'package:quali_prevention_app/common/constant.dart';
+
 class User {
   final String name;
   final String picture;
@@ -8,9 +10,23 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
+    String resolvePicturePath(dynamic rawPath) {
+      final path = (rawPath ?? '').toString();
+      if (path.isEmpty) {
+        return '';
+      }
+
+      final uri = Uri.tryParse(path);
+      if (uri != null && uri.hasScheme) {
+        return path;
+      }
+
+      return Uri.parse(AppConstants.apiBaseUrl).resolve(path).toString();
+    }
+
     return User(
-      name: json['name'],
-      picture: json['picture'],
+      name: (json['name'] ?? '').toString(),
+      picture: resolvePicturePath(json['picture']),
     );
   }
 

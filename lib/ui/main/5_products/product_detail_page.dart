@@ -2,6 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quali_prevention_app/common/constant.dart';
 import 'package:quali_prevention_app/common/model/product_model.dart';
 import 'package:quali_prevention_app/common/style.dart';
 import 'package:quali_prevention_app/global_widgets/custom_app_bar.dart';
@@ -161,7 +162,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.quali-prevention.fr${product?.imageFonctionnement}',
+                                      '${AppConstants.apiBaseUrl}${product?.imageFonctionnement}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -235,7 +236,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.quali-prevention.fr${product?.imageReferences}',
+                                      '${AppConstants.apiBaseUrl}${product?.imageReferences}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -309,7 +310,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.quali-prevention.fr${product?.imagePrix}',
+                                      '${AppConstants.apiBaseUrl}${product?.imagePrix}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -383,7 +384,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      'https://crm.quali-prevention.fr${product?.imageArguments}',
+                                      '${AppConstants.apiBaseUrl}${product?.imageArguments}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),

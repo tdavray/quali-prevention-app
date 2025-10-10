@@ -8,7 +8,7 @@ import 'package:quali_prevention_app/common/model/user_model.dart';
 
 class AuthService {
   // Base URL for the authentication service
-  static const String baseUrl = 'https://crm.quali-prevention.fr';
+  static const String baseUrl = AppConstants.apiBaseUrl;
 
   // Secure storage instance
   final _storage = const FlutterSecureStorage();

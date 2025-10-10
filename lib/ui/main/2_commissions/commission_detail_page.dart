@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quali_prevention_app/common/constant.dart';
 import 'package:quali_prevention_app/common/helper.dart';
 import 'package:quali_prevention_app/common/model/client_model.dart';
 import 'package:quali_prevention_app/common/style.dart';
@@ -100,7 +101,7 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                             backgroundImage: client?.picture != null &&
                                     client!.picture.isNotEmpty
                                 ? NetworkImage(
-                                    'https://crm.quali-prevention.fr${client!.picture}')
+                                    '${AppConstants.apiBaseUrl}${client!.picture}')
                                 : const AssetImage(
                                         'assets/placeholder-white.png')
                                     as ImageProvider,

@@ -87,7 +87,7 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                         child:
                             article?.image != null && article!.image.isNotEmpty
                                 ? Image.network(
-                                    'https://crm.quali-prevention.fr${article!.image}',
+                                    article!.image,
                                     fit: BoxFit.cover,
                                   )
                                 : Image.asset(
