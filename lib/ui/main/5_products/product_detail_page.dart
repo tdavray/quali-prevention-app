@@ -22,6 +22,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     id: 0,
     name: '',
     icon: '',
+    description: '',
+    synthesis: '',
     createdAt: '',
     updatedAt: '',
   );
@@ -98,18 +100,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       paddingListBottom: 0,
                       children: [
                         AccordionSection(
-                          isOpen: false,
+                          isOpen: true,
                           headerBackgroundColor: white,
                           contentBackgroundColor: white,
                           leftIcon: SvgPicture.asset(
-                            'assets/svg/products/duree.svg',
+                            'assets/svg/products/fonctionnement.svg',
                             width: 30,
                             height: 30,
                           ),
                           rightIcon: Icon(Icons.keyboard_arrow_down_rounded,
                               color: primary),
                           header: Text(
-                            'Durée',
+                            'Description',
                             style: GoogleFonts.poppins(
                               color: textPrimary,
                               fontSize: 18,
@@ -135,34 +137,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                if (product!.titleFonctionnement != null)
-                                  Text(
-                                    product!.titleFonctionnement!,
-                                    style: GoogleFonts.poppins(
-                                      color: textBlack,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                if (product!.titleFonctionnement != null)
-                                  const SizedBox(height: 10),
                                 Text(
-                                  product!.descriptionFonctionnement ?? '',
+                                  product!.description,
                                   style: GoogleFonts.poppins(
                                     color: textBlack,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                if (product!.imageFonctionnement != null)
+                                if (product!.descriptionImage != null &&
+                                    product!.descriptionImage!.isNotEmpty)
                                   const SizedBox(height: 20),
-                                if (product!.imageFonctionnement != null &&
-                                    product!.imageFonctionnement!.isNotEmpty)
+                                if (product!.descriptionImage != null &&
+                                    product!.descriptionImage!.isNotEmpty)
                                   ClipRRect(
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      '${AppConstants.apiBaseUrl}${product?.imageFonctionnement}',
+                                      '${AppConstants.apiBaseUrl}${product?.descriptionImage}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
@@ -176,14 +168,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           headerBackgroundColor: white,
                           contentBackgroundColor: white,
                           leftIcon: SvgPicture.asset(
-                            'assets/svg/products/modules.svg',
+                            'assets/svg/products/references.svg',
                             width: 30,
                             height: 30,
                           ),
                           rightIcon: Icon(Icons.keyboard_arrow_down_rounded,
                               color: primary),
                           header: Text(
-                            'Modules',
+                            'Synthèse',
                             style: GoogleFonts.poppins(
                               color: textPrimary,
                               fontSize: 18,
@@ -209,182 +201,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                if (product!.titleReferences != null)
-                                  Text(
-                                    product!.titleReferences!,
-                                    style: GoogleFonts.poppins(
-                                      color: textBlack,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                if (product!.titleReferences != null)
-                                  const SizedBox(height: 10),
                                 Text(
-                                  product?.descriptionReferences ?? '',
+                                  product!.synthesis,
                                   style: GoogleFonts.poppins(
                                     color: textBlack,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                if (product!.imageReferences != null)
+                                if (product!.synthesisImage != null &&
+                                    product!.synthesisImage!.isNotEmpty)
                                   const SizedBox(height: 20),
-                                if (product!.imageReferences != null &&
-                                    product!.imageReferences!.isNotEmpty)
+                                if (product!.synthesisImage != null &&
+                                    product!.synthesisImage!.isNotEmpty)
                                   ClipRRect(
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
                                     child: Image.network(
-                                      '${AppConstants.apiBaseUrl}${product?.imageReferences}',
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        AccordionSection(
-                          isOpen: false,
-                          headerBackgroundColor: white,
-                          contentBackgroundColor: white,
-                          leftIcon: SvgPicture.asset(
-                            'assets/svg/products/objectifs.svg',
-                            width: 30,
-                            height: 30,
-                          ),
-                          rightIcon: Icon(Icons.keyboard_arrow_down_rounded,
-                              color: primary),
-                          header: Text(
-                            'Objectifs',
-                            style: GoogleFonts.poppins(
-                              color: textPrimary,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          content: Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xffDCE5E7).withOpacity(0.5),
-                                    white.withOpacity(0.5)
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                )),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (product!.titlePrix != null)
-                                  Text(
-                                    product!.titlePrix!,
-                                    style: GoogleFonts.poppins(
-                                      color: textBlack,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                if (product!.titlePrix != null)
-                                  const SizedBox(height: 10),
-                                Text(
-                                  product!.descriptionPrix ?? '',
-                                  style: GoogleFonts.poppins(
-                                    color: textBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                if (product!.imagePrix != null)
-                                  const SizedBox(height: 20),
-                                if (product!.imagePrix != null &&
-                                    product!.imagePrix!.isNotEmpty)
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
-                                    child: Image.network(
-                                      '${AppConstants.apiBaseUrl}${product?.imagePrix}',
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        AccordionSection(
-                          isOpen: false,
-                          headerBackgroundColor: white,
-                          contentBackgroundColor: white,
-                          leftIcon: SvgPicture.asset(
-                            'assets/svg/products/arguments.svg',
-                            width: 30,
-                            height: 30,
-                          ),
-                          rightIcon: Icon(Icons.keyboard_arrow_down_rounded,
-                              color: primary),
-                          header: Text(
-                            'Arguments',
-                            style: GoogleFonts.poppins(
-                              color: textPrimary,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          content: Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xffDCE5E7).withOpacity(0.5),
-                                    white.withOpacity(0.5)
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                )),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (product!.titleArguments != null)
-                                  Text(
-                                    product!.titleArguments!,
-                                    style: GoogleFonts.poppins(
-                                      color: textBlack,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                if (product!.titleArguments != null)
-                                  const SizedBox(height: 10),
-                                Text(
-                                  product!.descriptionArguments ?? '',
-                                  style: GoogleFonts.poppins(
-                                    color: textBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                if (product!.imageArguments != null)
-                                  const SizedBox(height: 20),
-                                if (product!.imageArguments != null &&
-                                    product!.imageArguments!.isNotEmpty)
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
-                                    child: Image.network(
-                                      '${AppConstants.apiBaseUrl}${product?.imageArguments}',
+                                      '${AppConstants.apiBaseUrl}${product?.synthesisImage}',
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                     ),

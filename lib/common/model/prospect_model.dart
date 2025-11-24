@@ -1,9 +1,10 @@
 class Prospect {
-  String civility;
   String firstName;
   String lastName;
   String email;
   String mobilePhone;
+  String? companyName;
+  String? companyActivity;
   /*String address;
   String postalCode;
   String city;*/
@@ -13,11 +14,12 @@ class Prospect {
   int factureParAn;*/
 
   Prospect({
-    required this.civility,
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.mobilePhone,
+    this.companyName,
+    this.companyActivity,
     /*required this.address,
     required this.postalCode,
     required this.city,*/
@@ -29,11 +31,12 @@ class Prospect {
 
   Map<String, dynamic> toJson() {
     return {
-      'civility': civility,
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
       'mobile_phone': mobilePhone,
+      if (companyName != null) 'company_name': companyName,
+      if (companyActivity != null) 'company_activity': companyActivity,
       /*'address': address,
       'postal_code': postalCode,
       'city': city,*/

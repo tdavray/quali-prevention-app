@@ -44,6 +44,14 @@ class _SignUpWidgetState extends State<NewProspectPage> {
   late TextEditingController phoneController;
   late bool phoneIsEmpty;
 
+  late FocusNode companyNameFocusNode;
+  late TextEditingController companyNameController;
+  late bool companyNameIsEmpty;
+
+  late FocusNode companyActivityFocusNode;
+  late TextEditingController companyActivityController;
+  late bool companyActivityIsEmpty;
+
   late FocusNode addressFocusNode;
   late TextEditingController addressController;
   late bool addressIsEmpty;
@@ -92,6 +100,14 @@ class _SignUpWidgetState extends State<NewProspectPage> {
     phoneFocusNode = FocusNode();
     phoneController = TextEditingController();
     phoneIsEmpty = true;
+
+    companyNameFocusNode = FocusNode();
+    companyNameController = TextEditingController();
+    companyNameIsEmpty = true;
+
+    companyActivityFocusNode = FocusNode();
+    companyActivityController = TextEditingController();
+    companyActivityIsEmpty = true;
 
     addressFocusNode = FocusNode();
     addressController = TextEditingController();
@@ -229,6 +245,42 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                       },
                       onUnfocus: () => phoneFocusNode.unfocus(),
                       isEmpty: phoneIsEmpty,
+                    ),
+                    Divider(
+                      color: grey,
+                      height: 1,
+                    ),
+                    CustomTextField(
+                      keyboardType: TextInputType.text,
+                      focusNode: companyNameFocusNode,
+                      controller: companyNameController,
+                      labelText: 'Nom de l\'entreprise',
+                      icon: Icons.business,
+                      onChanged: (value) {
+                        setState(() {
+                          companyNameIsEmpty = value.isEmpty;
+                        });
+                      },
+                      onUnfocus: () => companyNameFocusNode.unfocus(),
+                      isEmpty: companyNameIsEmpty,
+                    ),
+                    Divider(
+                      color: grey,
+                      height: 1,
+                    ),
+                    CustomTextField(
+                      keyboardType: TextInputType.text,
+                      focusNode: companyActivityFocusNode,
+                      controller: companyActivityController,
+                      labelText: 'Activité de l\'entreprise',
+                      icon: Icons.work,
+                      onChanged: (value) {
+                        setState(() {
+                          companyActivityIsEmpty = value.isEmpty;
+                        });
+                      },
+                      onUnfocus: () => companyActivityFocusNode.unfocus(),
+                      isEmpty: companyActivityIsEmpty,
                     ),
                     /*Divider(
                       color: grey,
@@ -500,11 +552,16 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     optin,
                 onPressed: () async {
                   Prospect prospect = Prospect(
-                    civility: '1',
                     lastName: lastNameController.text,
                     firstName: firstNameController.text,
                     email: emailController.text,
                     mobilePhone: phoneController.text,
+                    companyName: companyNameController.text.isEmpty
+                        ? null
+                        : companyNameController.text,
+                    companyActivity: companyActivityController.text.isEmpty
+                        ? null
+                        : companyActivityController.text,
                     /*address: addressController.text,
                     postalCode: postalCodeController.text,
                     city: cityController.text,

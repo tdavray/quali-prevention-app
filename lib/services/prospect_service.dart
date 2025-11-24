@@ -17,7 +17,7 @@ class ProspectService {
     log(json.encode(prospect.toJson()));
     log(prospect.toJson().toString());
 
-    final url = Uri.parse('$baseUrl/api/clients');
+    final url = Uri.parse('$baseUrl/api/clients/prospect');
     final response = await http.post(
       url,
       headers: {

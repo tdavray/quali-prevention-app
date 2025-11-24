@@ -40,17 +40,22 @@ class _CommissionsPageState extends State<CommissionsPage>
   }
 
   Future<void> _loadUserProfile() async {
-    currentMonthCa = await userService.getUserCA(
-      params: '?month=current',
-    );
-    currentMonthCommission = await userService.getCurrentMonthUserCommissions();
-    currentMonthClients = await userService.getUserClientsByStatus(
-      params: '?month=current',
-    );
-    allCommissions = await userService.getAllUserCommissions();
-    allClients = await userService.getAllUserClients();
-    clientAmountByYear = await userService.getClientAmountByYear(year: 2024);
-    await _loadUserNetwork();
+    try {
+      currentMonthCa = await userService.getUserCA(
+        params: '?month=current',
+      );
+      currentMonthCommission =
+          await userService.getCurrentMonthUserCommissions();
+      currentMonthClients = await userService.getUserClientsByStatus(
+        params: '?month=current',
+      );
+      allCommissions = await userService.getAllUserCommissions();
+      allClients = await userService.getAllUserClients();
+      clientAmountByYear = await userService.getClientAmountByYear(year: 2024);
+      await _loadUserNetwork();
+    } catch (e) {
+      print('Error loading user profile: $e');
+    }
     setState(() {});
   }
 

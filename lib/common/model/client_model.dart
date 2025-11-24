@@ -36,11 +36,13 @@ class Client {
       id: json['id'] is int
           ? json['id'] as int
           : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
-      firstName: (json['first_name'] ?? '').toString(),
+      firstName: (json['first_name'] ?? json['denomination'] ?? '').toString(),
       lastName: (json['last_name'] ?? '').toString(),
       createdAt: (json['created_at'] ?? '').toString(),
       picture: (json['picture'] ?? '').toString(),
-      statutName: (json['statut_name'] ?? '').toString(),
+      statutName:
+          (json['api_status'] ?? json['statut_name'] ?? json['status'] ?? '')
+              .toString(),
       domain: (json['domain']?.toString().isEmpty ?? true)
           ? null
           : json['domain'].toString(),
@@ -60,9 +62,11 @@ class Client {
       projectAdvancement: json['project_advancement'] is int
           ? json['project_advancement'] as int
           : int.tryParse(json['project_advancement']?.toString() ?? ''),
-      montant: (json['montant']?.toString().isEmpty ?? true)
-          ? null
-          : json['montant'].toString(),
+      montant:
+          ((json['montant'] ?? json['montant_contrat'])?.toString().isEmpty ??
+                  true)
+              ? null
+              : (json['montant'] ?? json['montant_contrat']).toString(),
       formation: (json['formation']?.toString().isEmpty ?? true)
           ? null
           : json['formation'].toString(),
