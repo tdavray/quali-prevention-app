@@ -46,9 +46,9 @@ class CreateUser {
   /*final String firstAddress;
   final String city;
   final String zip;*/
-  final String matricule;
-  /*final String company;
-  final String activite;*/
+  final String? siret;
+  /*final String company;*/
+  final String? activite;
   final String password;
 
   CreateUser({
@@ -59,9 +59,9 @@ class CreateUser {
     /*required this.firstAddress,
     required this.city,
     required this.zip,*/
-    required this.matricule,
-    /*required this.company,
-    required this.activite,*/
+    this.siret,
+    /*required this.company,*/
+    this.activite,
     required this.password,
   });
 
@@ -74,9 +74,9 @@ class CreateUser {
       /*firstAddress: json['first_address'],
       city: json['city'],
       zip: json['zip'],*/
-      matricule: json['matricule'],
-      /*company: json['company'],
-      activite: json['activite'],*/
+      siret: json['siret'],
+      /*company: json['company'],*/
+      activite: json['activite'],
       password: json['password'],
     );
   }
@@ -90,9 +90,9 @@ class CreateUser {
       /*'first_address': firstAddress,
       'city': city,
       'zip': zip,*/
-      'matricule': matricule,
-      /*'company': company,
-      'activite': activite,*/
+      if (siret != null && siret!.isNotEmpty) 'siret': siret,
+      /*'company': company,*/
+      if (activite != null && activite!.isNotEmpty) 'activite': activite,
       'password': password,
     };
   }

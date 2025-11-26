@@ -48,6 +48,10 @@ class _SignUpWidgetState extends State<NewProspectPage> {
   late TextEditingController companyNameController;
   late bool companyNameIsEmpty;
 
+  late FocusNode siretFocusNode;
+  late TextEditingController siretController;
+  late bool siretIsEmpty;
+
   late FocusNode companyActivityFocusNode;
   late TextEditingController companyActivityController;
   late bool companyActivityIsEmpty;
@@ -104,6 +108,10 @@ class _SignUpWidgetState extends State<NewProspectPage> {
     companyNameFocusNode = FocusNode();
     companyNameController = TextEditingController();
     companyNameIsEmpty = true;
+
+    siretFocusNode = FocusNode();
+    siretController = TextEditingController();
+    siretIsEmpty = true;
 
     companyActivityFocusNode = FocusNode();
     companyActivityController = TextEditingController();
@@ -264,24 +272,6 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                       onUnfocus: () => companyNameFocusNode.unfocus(),
                       isEmpty: companyNameIsEmpty,
                     ),
-                    Divider(
-                      color: grey,
-                      height: 1,
-                    ),
-                    CustomTextField(
-                      keyboardType: TextInputType.text,
-                      focusNode: companyActivityFocusNode,
-                      controller: companyActivityController,
-                      labelText: 'Activité de l\'entreprise',
-                      icon: Icons.work,
-                      onChanged: (value) {
-                        setState(() {
-                          companyActivityIsEmpty = value.isEmpty;
-                        });
-                      },
-                      onUnfocus: () => companyActivityFocusNode.unfocus(),
-                      isEmpty: companyActivityIsEmpty,
-                    ),
                     /*Divider(
                       color: grey,
                       height: 1,
@@ -357,6 +347,38 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                 ),
                 child: Column(
                   children: [
+                    CustomTextField(
+                      keyboardType: TextInputType.number,
+                      focusNode: siretFocusNode,
+                      controller: siretController,
+                      labelText: 'SIRET',
+                      icon: Icons.apartment,
+                      onChanged: (value) {
+                        setState(() {
+                          siretIsEmpty = value.isEmpty;
+                        });
+                      },
+                      onUnfocus: () => siretFocusNode.unfocus(),
+                      isEmpty: siretIsEmpty,
+                    ),
+                    Divider(
+                      color: grey,
+                      height: 1,
+                    ),
+                    CustomTextField(
+                      keyboardType: TextInputType.text,
+                      focusNode: companyActivityFocusNode,
+                      controller: companyActivityController,
+                      labelText: 'Activité de l\'entreprise',
+                      icon: Icons.settings,
+                      onChanged: (value) {
+                        setState(() {
+                          companyActivityIsEmpty = value.isEmpty;
+                        });
+                      },
+                      onUnfocus: () => companyActivityFocusNode.unfocus(),
+                      isEmpty: companyActivityIsEmpty,
+                    ),
                     /*CustomTextField(
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -559,6 +581,9 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     companyName: companyNameController.text.isEmpty
                         ? null
                         : companyNameController.text,
+                    siret: siretController.text.isEmpty
+                        ? null
+                        : siretController.text,
                     companyActivity: companyActivityController.text.isEmpty
                         ? null
                         : companyActivityController.text,

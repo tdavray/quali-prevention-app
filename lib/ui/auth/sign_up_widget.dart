@@ -49,9 +49,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   late TextEditingController cityController;
   late bool cityIsEmpty;
 
-  late FocusNode matriculeFocusNode;
-  late TextEditingController matriculeController;
-  late bool matriculeIsEmpty;
+  late FocusNode siretFocusNode;
+  late TextEditingController siretController;
+  late bool siretIsEmpty;
 
   late FocusNode companyNameFocusNode;
   late TextEditingController companyNameController;
@@ -96,9 +96,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     cityController = TextEditingController();
     cityIsEmpty = true;
 
-    matriculeFocusNode = FocusNode();
-    matriculeController = TextEditingController();
-    matriculeIsEmpty = true;
+    siretFocusNode = FocusNode();
+    siretController = TextEditingController();
+    siretIsEmpty = true;
 
     companyNameFocusNode = FocusNode();
     companyNameController = TextEditingController();
@@ -119,6 +119,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   bool _isValidPassword(String password) {
     final passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d).{8,}$');
     return passwordRegex.hasMatch(password);
+  }
+
+  bool _isValidSiret(String siret) {
+    if (siret.isEmpty) return true; // SIRET is optional
+    return siret.length == 14;
   }
 
   @override
@@ -327,17 +332,35 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       children: [
                         CustomTextField(
                           keyboardType: TextInputType.number,
-                          focusNode: matriculeFocusNode,
-                          controller: matriculeController,
-                          labelText: 'Matricule Beauty Sané',
+                          focusNode: siretFocusNode,
+                          controller: siretController,
+                          labelText: 'SIRET',
                           icon: Icons.apartment,
                           onChanged: (value) {
                             setState(() {
-                              matriculeIsEmpty = value.isEmpty;
+                              siretIsEmpty = value.isEmpty;
                             });
                           },
-                          onUnfocus: () => matriculeFocusNode.unfocus(),
-                          isEmpty: matriculeIsEmpty,
+                          onUnfocus: () => siretFocusNode.unfocus(),
+                          isEmpty: siretIsEmpty,
+                        ),
+                        Divider(
+                          color: grey,
+                          height: 1,
+                        ),
+                        CustomTextField(
+                          keyboardType: TextInputType.text,
+                          focusNode: activityFocusNode,
+                          controller: activityController,
+                          labelText: 'Activité de l\'entreprise',
+                          icon: Icons.settings,
+                          onChanged: (value) {
+                            setState(() {
+                              activityIsEmpty = value.isEmpty;
+                            });
+                          },
+                          onUnfocus: () => activityFocusNode.unfocus(),
+                          isEmpty: activityIsEmpty,
                         ),
                         /*Divider(
                           color: grey,
@@ -421,6 +444,21 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         return; // Arrête le processus si le mot de passe est invalide
                       }
 
+                      // Vérification du format du SIRET (optionnel mais 14 chiffres si renseigné)
+                      if (!_isValidSiret(siretController.text)) {
+                        await Fluttertoast.showToast(
+                          msg:
+                              'Le numéro SIRET doit contenir exactement 14 chiffres',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.TOP,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 18.0,
+                        );
+                        return; // Arrête le processus si le SIRET est invalide
+                      }
+
                       CreateUser createuser = CreateUser(
                         lastName: lastNameController.text,
                         firstName: firstNameController.text,
@@ -429,9 +467,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         /*firstAddress: addressController.text,
                         city: cityController.text,
                         zip: postalCodeController.text,*/
-                        matricule: matriculeController.text,
-                        /*company: companyNameController.text,
-                        activite: activityController.text,*/
+                        siret: siretController.text.isNotEmpty
+                            ? siretController.text
+                            : null,
+                        activite: activityController.text.isNotEmpty
+                            ? activityController.text
+                            : null,
+                        /*company: companyNameController.text,*/
                         password: passwordController.text,
                       );
                       bool value = await authService.createUser(createuser);

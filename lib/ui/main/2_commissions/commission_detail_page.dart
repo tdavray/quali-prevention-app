@@ -184,30 +184,6 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                                 ),
                                 TextSpan(
                                   children: [
-                                    const TextSpan(text: 'Formation : '),
-                                    TextSpan(text: client!.formation ?? ''),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6),
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 6,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/svg/installation.svg',
-                                height: 20,
-                              ),
-                              Text.rich(
-                                style: const TextStyle(
-                                  color: Color(0xff434343),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                TextSpan(
-                                  children: [
                                     const TextSpan(text: 'Montant : '),
                                     TextSpan(
                                       text: client!.montant == null

@@ -4,6 +4,7 @@ class Prospect {
   String email;
   String mobilePhone;
   String? companyName;
+  String? siret;
   String? companyActivity;
   /*String address;
   String postalCode;
@@ -19,6 +20,7 @@ class Prospect {
     required this.email,
     required this.mobilePhone,
     this.companyName,
+    this.siret,
     this.companyActivity,
     /*required this.address,
     required this.postalCode,
@@ -36,6 +38,7 @@ class Prospect {
       'email': email,
       'mobile_phone': mobilePhone,
       if (companyName != null) 'company_name': companyName,
+      if (siret != null) 'siret': siret,
       if (companyActivity != null) 'company_activity': companyActivity,
       /*'address': address,
       'postal_code': postalCode,

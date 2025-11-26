@@ -192,16 +192,35 @@ class UserService {
     );
 
     if (response.statusCode == 200) {
-      final List<dynamic> clients = json.decode(response.body);
+      final dynamic decoded = json.decode(response.body);
+      
+      // Handle both List and Map responses
+      List<dynamic> clients;
+      if (decoded is List) {
+        clients = decoded;
+      } else if (decoded is Map) {
+        // If it's a map, try to extract the list from it
+        // or convert map values to a list
+        if (decoded.containsKey('data')) {
+          clients = decoded['data'] as List<dynamic>;
+        } else {
+          // If the map contains client objects directly, convert values to list
+          clients = decoded.values.toList();
+        }
+      } else {
+        return [];
+      }
+      
       if (clients.isNotEmpty) {
         return clients
+            .where((client) => client is Map<String, dynamic>)
             .map((client) => Client.fromJson(client as Map<String, dynamic>))
             .toList();
       }
 
       return [];
     } else {
-      print('Erreur lors de la récupération des commissions: ${response.body}');
+      print('Erreur lors de la récupération des clients: ${response.body}');
       return [];
     }
   }
@@ -262,10 +281,26 @@ class UserService {
     );
 
     if (response.statusCode == 200) {
-      final List<dynamic> networkData = json.decode(response.body);
+      final dynamic decoded = json.decode(response.body);
+      
+      // Handle both List and Map responses
+      List<dynamic> networkData;
+      if (decoded is List) {
+        networkData = decoded;
+      } else if (decoded is Map) {
+        if (decoded.containsKey('data')) {
+          networkData = decoded['data'] as List<dynamic>;
+        } else {
+          networkData = decoded.values.toList();
+        }
+      } else {
+        return [];
+      }
+      
       // Convert the response to a list of UserNetwork objects
       return networkData
-          .map((networkItem) => UserNetwork.fromJson(networkItem))
+          .where((item) => item is Map<String, dynamic>)
+          .map((networkItem) => UserNetwork.fromJson(networkItem as Map<String, dynamic>))
           .toList();
     } else {
       print(

@@ -867,7 +867,7 @@ class _CommissionsPageState extends State<CommissionsPage>
   BarChartData randomData() {
     // Calculate the maximum value from the data
     double maxValue = 0;
-    if (currentMonthClients != null) {
+    if (currentMonthClients != null && currentMonthClients!.isNotEmpty) {
       maxValue = currentMonthClients!.values
           .map((value) => value.toDouble())
           .reduce((a, b) => a > b ? a : b); // Find the max value
@@ -961,7 +961,7 @@ class _CommissionsPageState extends State<CommissionsPage>
   }
 
   double get maxYValue {
-    if (clientAmountByYear == null) return 0;
+    if (clientAmountByYear == null || clientAmountByYear!.isEmpty) return 0;
 
     double maxValue = clientAmountByYear!.values
         .map((value) => value.toDouble())
