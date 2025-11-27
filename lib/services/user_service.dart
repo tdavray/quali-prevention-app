@@ -193,7 +193,7 @@ class UserService {
 
     if (response.statusCode == 200) {
       final dynamic decoded = json.decode(response.body);
-      
+
       // Handle both List and Map responses
       List<dynamic> clients;
       if (decoded is List) {
@@ -210,11 +210,11 @@ class UserService {
       } else {
         return [];
       }
-      
+
       if (clients.isNotEmpty) {
         return clients
-            .where((client) => client is Map<String, dynamic>)
-            .map((client) => Client.fromJson(client as Map<String, dynamic>))
+            .whereType<Map<String, dynamic>>()
+            .map((client) => Client.fromJson(client))
             .toList();
       }
 
@@ -282,7 +282,7 @@ class UserService {
 
     if (response.statusCode == 200) {
       final dynamic decoded = json.decode(response.body);
-      
+
       // Handle both List and Map responses
       List<dynamic> networkData;
       if (decoded is List) {
@@ -296,11 +296,11 @@ class UserService {
       } else {
         return [];
       }
-      
+
       // Convert the response to a list of UserNetwork objects
       return networkData
-          .where((item) => item is Map<String, dynamic>)
-          .map((networkItem) => UserNetwork.fromJson(networkItem as Map<String, dynamic>))
+          .whereType<Map<String, dynamic>>()
+          .map((networkItem) => UserNetwork.fromJson(networkItem))
           .toList();
     } else {
       print(
