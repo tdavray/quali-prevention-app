@@ -370,7 +370,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         TextButton(
                           onPressed: () => _launchURL(
-                              'https://sdmformation-mybeeacademy.fr/rgpd-application-sdm-academy/'),
+                              'https://sdmformation-mybeeacademy.fr/rgpd-application-quali-prevention/'),
                           child: Text(
                             'Voir la politique de confidentialité',
                             style: GoogleFonts.poppins(
@@ -382,7 +382,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         TextButton(
                           onPressed: () => _launchURL(
-                              'https://sdmformation-mybeeacademy.fr/contact-suppression-compte-sdm-academy/'),
+                              'https://sdmformation-mybeeacademy.fr/contact-suppression-compte-quali-prevention/'),
                           child: Text(
                             'Demande de suppression de compte',
                             style: GoogleFonts.poppins(

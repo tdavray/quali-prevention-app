@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "sdm_academy_app" "\0"
+            VALUE "CompanyName", "Workineo" "\0"
+            VALUE "FileDescription", "Quali Prévention" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "sdm_academy_app" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "sdm_academy_app.exe" "\0"
-            VALUE "ProductName", "sdm_academy_app" "\0"
+            VALUE "InternalName", "quali_prevention_app" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 Workineo. All rights reserved." "\0"
+            VALUE "OriginalFilename", "quali_prevention_app.exe" "\0"
+            VALUE "ProductName", "Quali Prévention" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

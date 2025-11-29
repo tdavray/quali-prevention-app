@@ -1,21 +1,249 @@
 {
   "project_info": {
-    "project_number": "779494709970",
-    "project_id": "sdm_academy_app",
-    "storage_bucket": "sdm_academy_app.appspot.com"
+    "project_number": "191698780329",
+    "project_id": "workineo-cse",
+    "storage_bucket": "workineo-cse.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:779494709970:android:9d50cd9b10a8a83a7eeb0b",
+        "mobilesdk_app_id": "1:191698780329:android:d9e96d01ca9a686a4569b8",
         "android_client_info": {
-          "package_name": "com.workineo.sdmacademy"
+          "package_name": "com.appicity.one"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCuTZDC_-VjGmqf9d6W9MvX-dJm-VU0Nl8"
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:e1bc8a28462ed31c4569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.bonneveine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:62d98b2257a628054569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.carrefour"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:bdac785c08e3c4f44569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:bd063a1542d664ce4569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.habitat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:f1dabdca4f37667f4569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.kalisun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:d95ebcf7ff6bbbe84569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.one"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:1509e464707b02ff4569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.ortecfos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:fedf38c08550c4504569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.pizzorno"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:748ee6536d51d36c4569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.qualiprevention"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:aaa99ce4bbd3f9e84569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.sanofi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:907ed0a17bd4d3374569b8",
+        "android_client_info": {
+          "package_name": "com.workineo.sepr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191698780329:android:33842cdedc496ea84569b8",
+        "android_client_info": {
+          "package_name": "com.workineoCSE.workineoCSE"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5anq1ekjN0HN8nU0Tro58eiHoefwwquY"
         }
       ],
       "services": {
