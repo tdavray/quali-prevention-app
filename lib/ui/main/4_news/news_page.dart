@@ -42,7 +42,7 @@ class _NewsPageState extends State<NewsPage> {
       currentPage++;
       setState(() {
         articles.addAll(newArticles);
-        articles.sort((a, b) => a.id.compareTo(b.id));
+        articles.sort((a, b) => b.createdAt.compareTo(a.createdAt));
         hasMore = newArticles.length ==
             4; // si on reçoit moins de 4 articles, il n'y a plus de données à charger
         isLoading = false;

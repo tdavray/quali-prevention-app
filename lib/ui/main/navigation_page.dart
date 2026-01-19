@@ -91,6 +91,8 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: white,
@@ -109,22 +111,28 @@ class _NavigationPageState extends State<NavigationPage> {
               children: [
                 Stack(
                   children: [
-                    Container(
-                      color: white,
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                        right: 10,
-                        bottom: 40,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          buildNavItem('Accueil', 'accueil', 0),
-                          buildNavItem('Commissions', 'commissions', 1),
-                          const SizedBox(width: 30),
-                          buildNavItem('Actus', 'actus', 3),
-                          buildNavItem('Formations', 'produits', 4),
-                        ],
+                    SafeArea(
+                      top: false,
+                      left: false,
+                      right: false,
+                      bottom: true,
+                      child: Container(
+                        color: white,
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                          bottom: 16,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            buildNavItem('Accueil', 'accueil', 0),
+                            buildNavItem('Commissions', 'commissions', 1),
+                            const SizedBox(width: 30),
+                            buildNavItem('Actus', 'actus', 3),
+                            buildNavItem('Ressources', 'produits', 4),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -134,7 +142,7 @@ class _NavigationPageState extends State<NavigationPage> {
           ),
           Positioned(
             left: MediaQuery.of(context).size.width / 2 - 22,
-            bottom: 80,
+            bottom: 80 + bottomInset,
             child: FloatingActionButton(
               key: floatingButtonKey,
               onPressed: () async {
