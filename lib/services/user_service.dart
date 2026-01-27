@@ -139,6 +139,24 @@ class UserService {
           return {entry.key: (entry.value as num).round()};
         }).toList();
 
+        DateTime parseKey(String key) {
+          final parts = key.split('/');
+          if (parts.length != 2) {
+            return DateTime(1970, 1);
+          }
+
+          final month = int.tryParse(parts[0]) ?? 1;
+          final yearPart = int.tryParse(parts[1]) ?? 0;
+          final year = yearPart < 100 ? 2000 + yearPart : yearPart;
+          return DateTime(year, month);
+        }
+
+        result.sort((a, b) {
+          final dateA = parseKey(a.keys.first);
+          final dateB = parseKey(b.keys.first);
+          return dateB.compareTo(dateA);
+        });
+
         return result;
       }
       return [];

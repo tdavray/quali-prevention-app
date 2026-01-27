@@ -142,7 +142,7 @@ class _NavigationPageState extends State<NavigationPage> {
           ),
           Positioned(
             left: MediaQuery.of(context).size.width / 2 - 22,
-            bottom: 80 + bottomInset,
+            bottom: 60 + bottomInset,
             child: FloatingActionButton(
               key: floatingButtonKey,
               onPressed: () async {

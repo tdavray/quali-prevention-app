@@ -9,7 +9,8 @@ class Client {
   String? consomationAnuelle;
   String? credits;
   num? commission;
-  String? dateInstallation;
+    String? rdvSubventionAt;
+    String? estimatedPaymentDate;
   int? projectAdvancement;
   String? montant;
   String? formation;
@@ -25,7 +26,8 @@ class Client {
     required this.consomationAnuelle,
     this.credits,
     required this.commission,
-    this.dateInstallation,
+        this.rdvSubventionAt,
+        this.estimatedPaymentDate,
     required this.projectAdvancement,
     this.montant,
     this.formation,
@@ -56,9 +58,13 @@ class Client {
       commission: json['commission'] is num
           ? json['commission'] as num
           : num.tryParse(json['commission']?.toString() ?? ''),
-      dateInstallation: (json['date_installation']?.toString().isEmpty ?? true)
+      rdvSubventionAt: (json['rdv_subvention_at']?.toString().isEmpty ?? true)
           ? null
-          : json['date_installation'].toString(),
+          : json['rdv_subvention_at'].toString(),
+      estimatedPaymentDate:
+          (json['estimated_payment_date']?.toString().isEmpty ?? true)
+              ? null
+              : json['estimated_payment_date'].toString(),
       projectAdvancement: json['project_advancement'] is int
           ? json['project_advancement'] as int
           : int.tryParse(json['project_advancement']?.toString() ?? ''),

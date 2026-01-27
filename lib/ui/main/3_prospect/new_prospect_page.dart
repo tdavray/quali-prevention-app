@@ -573,6 +573,20 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     !commentIsEmpty &&*/
                     optin,
                 onPressed: () async {
+                  final siretText = siretController.text.trim();
+                  if (siretText.isNotEmpty && siretText.length != 14) {
+                    await Fluttertoast.showToast(
+                      msg: 'Le SIRET doit contenir 14 chiffres.',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.TOP,
+                      timeInSecForIosWeb: 3,
+                      backgroundColor: Colors.red,
+                      textColor: white,
+                      fontSize: 18.0,
+                    );
+                    return;
+                  }
+
                   Prospect prospect = Prospect(
                     lastName: lastNameController.text,
                     firstName: firstNameController.text,
@@ -581,9 +595,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     companyName: companyNameController.text.isEmpty
                         ? null
                         : companyNameController.text,
-                    siret: siretController.text.isEmpty
-                        ? null
-                        : siretController.text,
+                    siret: siretText.isEmpty ? null : siretText,
                     companyActivity: companyActivityController.text.isEmpty
                         ? null
                         : companyActivityController.text,
@@ -596,25 +608,20 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     comment: commentController.text,
                   );
                   print(prospect.toJson());
-                  await prospectService.createProspect(prospect).then(
-                    (value) async {
-                      print(value);
-
-                      await Fluttertoast.showToast(
-                        msg: value
-                            ? 'Prospect ajouté avec succès'
-                            : 'Erreur lors de l\'ajout du prospect',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.TOP,
-                        timeInSecForIosWeb: 3,
-                        backgroundColor: value ? Colors.green : Colors.red,
-                        textColor: white,
-                        fontSize: 18.0,
-                      );
-
-                      await Navigator.pushReplacementNamed(context, '/home');
-                    },
+                  final result = await prospectService.createProspect(prospect);
+                  await Fluttertoast.showToast(
+                    msg: result.message,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.TOP,
+                    timeInSecForIosWeb: 3,
+                    backgroundColor: result.success ? Colors.green : Colors.red,
+                    textColor: white,
+                    fontSize: 18.0,
                   );
+
+                  if (result.success) {
+                    await Navigator.pushReplacementNamed(context, '/home');
+                  }
                 },
                 text: 'Envoyer',
                 backgroundColor: secondary,

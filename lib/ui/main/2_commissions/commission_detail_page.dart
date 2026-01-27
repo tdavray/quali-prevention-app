@@ -98,14 +98,19 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           CircleAvatar(
-                            backgroundImage: client?.picture != null &&
-                                    client!.picture.isNotEmpty
-                                ? NetworkImage(
-                                    '${AppConstants.apiBaseUrl}${client!.picture}')
-                                : const AssetImage(
-                                        'assets/placeholder-white.png')
-                                    as ImageProvider,
-                            backgroundColor: grey,
+                            backgroundImage: null,
+                            backgroundColor:
+                                _statusColor(client?.statutName ?? ''),
+                            child: Text(
+                              _initials(
+                                client?.firstName ?? '',
+                                client?.lastName ?? '',
+                              ),
+                              style: GoogleFonts.poppins(
+                                color: white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             radius: 25,
                           ),
                           Column(
@@ -240,9 +245,11 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                             ),
                           ),
                           Text(
-                            client!.dateInstallation == null
+                            client!.estimatedPaymentDate == null
                                 ? 'Non définie'
-                                : formatDateTime(client!.dateInstallation!),
+                                : formatDateTime(
+                                    client!.estimatedPaymentDate!,
+                                  ),
                             style: TextStyle(
                               color: textBlack,
                               fontSize: 18,
@@ -282,5 +289,46 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
         ),
       ),
     );
+  }
+
+  Color _statusColor(String status) {
+    final normalized = status.toLowerCase();
+
+    if (normalized.contains('prospect')) {
+      return secondary;
+    }
+
+    if (normalized.contains('payé') || normalized.contains('paye')) {
+      return const Color(0xFF7FAF00);
+    }
+
+    if (normalized.contains('abandon') ||
+        normalized.contains('refus') ||
+        normalized.contains('annul') ||
+        normalized.contains('non éligible') ||
+        normalized.contains('non-eligible')) {
+      return Colors.red;
+    }
+
+    if (normalized.contains('signé') ||
+        normalized.contains('signe') ||
+        normalized.contains('déposé') ||
+        normalized.contains('depose') ||
+        normalized.contains('en cours')) {
+      return const Color(0xFFF99B0C);
+    }
+
+    return grey;
+  }
+
+  String _initials(String firstName, String lastName) {
+    final first = firstName.trim().isNotEmpty
+        ? firstName.trim().characters.first
+        : '';
+    final last = lastName.trim().isNotEmpty
+        ? lastName.trim().characters.first
+        : '';
+    final initials = '$first$last'.trim();
+    return initials.isEmpty ? '?' : initials.toUpperCase();
   }
 }

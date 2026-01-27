@@ -670,9 +670,32 @@ class _CommissionsPageState extends State<CommissionsPage>
                                 spacing: 20,
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        '${AppConstants.apiBaseUrl}${client.picture}'),
-                                    backgroundColor: grey,
+                                    backgroundImage: (client.picture
+                                                .toString()
+                                                .isNotEmpty)
+                                        ? NetworkImage(
+                                            '${AppConstants.apiBaseUrl}${client.picture}',
+                                          )
+                                        : null,
+                                    backgroundColor: client.picture
+                                            .toString()
+                                            .isNotEmpty
+                                        ? grey
+                                        : _statusColor(client.statutName),
+                                    child: client.picture
+                                            .toString()
+                                            .isNotEmpty
+                                        ? null
+                                        : Text(
+                                            _initials(
+                                              client.firstName,
+                                              client.lastName,
+                                            ),
+                                            style: GoogleFonts.poppins(
+                                              color: white,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
                                     radius: 25,
                                   ),
                                   Column(
@@ -693,6 +716,7 @@ class _CommissionsPageState extends State<CommissionsPage>
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
+                                      const SizedBox(height: 4),
                                       Text(
                                         client.statutName,
                                         style: GoogleFonts.poppins(
@@ -825,14 +849,10 @@ class _CommissionsPageState extends State<CommissionsPage>
       barRods: [
         BarChartRodData(
           toY: y,
-          gradient: LinearGradient(
-            colors: [const Color(0xffF99B0C), secondary],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+          color: const Color(0xFFF99B0C),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
           borderDashArray: x >= 4 ? [4, 4] : null,
-          width: 50,
+          width: 32,
         ),
       ],
     );
@@ -842,13 +862,13 @@ class _CommissionsPageState extends State<CommissionsPage>
     const style = TextStyle(
       color: Color(0xff727576),
       fontWeight: FontWeight.w500,
-      fontSize: 14,
+      fontSize: 12,
     );
     List<String> days = [
       'Prospect',
       'Abandon',
       'Signé',
-      'En formation',
+      'En\nformation',
       'Sortie'
     ];
 
@@ -859,7 +879,7 @@ class _CommissionsPageState extends State<CommissionsPage>
 
     return SideTitleWidget(
       meta: meta,
-      space: 16,
+      space: 12,
       child: text,
     );
   }
@@ -878,6 +898,7 @@ class _CommissionsPageState extends State<CommissionsPage>
 
     return BarChartData(
       maxY: maxYValue + 5,
+      groupsSpace: 16,
       barTouchData: BarTouchData(
         enabled: false,
       ),
@@ -887,7 +908,7 @@ class _CommissionsPageState extends State<CommissionsPage>
           sideTitles: SideTitles(
             showTitles: true,
             getTitlesWidget: getTitles,
-            reservedSize: 38,
+            reservedSize: 48,
           ),
         ),
         leftTitles: const AxisTitles(
@@ -969,5 +990,46 @@ class _CommissionsPageState extends State<CommissionsPage>
     maxValue = (maxValue + 4) ~/ 5 * 5;
 
     return maxValue;
+  }
+
+  Color _statusColor(String status) {
+    final normalized = status.toLowerCase();
+
+    if (normalized.contains('prospect')) {
+      return secondary;
+    }
+
+    if (normalized.contains('payé') || normalized.contains('paye')) {
+      return const Color(0xFF7FAF00);
+    }
+
+    if (normalized.contains('abandon') ||
+        normalized.contains('refus') ||
+        normalized.contains('annul') ||
+        normalized.contains('non éligible') ||
+        normalized.contains('non-eligible')) {
+      return Colors.red;
+    }
+
+    if (normalized.contains('signé') ||
+        normalized.contains('signe') ||
+        normalized.contains('déposé') ||
+        normalized.contains('depose') ||
+        normalized.contains('en cours')) {
+      return const Color(0xFFF99B0C);
+    }
+
+    return grey;
+  }
+
+  String _initials(String firstName, String lastName) {
+    final first = firstName.trim().isNotEmpty
+        ? firstName.trim().characters.first
+        : '';
+    final last = lastName.trim().isNotEmpty
+        ? lastName.trim().characters.first
+        : '';
+    final initials = '$first$last'.trim();
+    return initials.isEmpty ? '?' : initials.toUpperCase();
   }
 }

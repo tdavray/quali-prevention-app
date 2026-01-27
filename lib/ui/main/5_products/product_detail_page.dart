@@ -1,4 +1,5 @@
 import 'package:accordion/accordion.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:quali_prevention_app/common/model/product_model.dart';
 import 'package:quali_prevention_app/common/style.dart';
 import 'package:quali_prevention_app/global_widgets/custom_app_bar.dart';
 import 'package:quali_prevention_app/services/product_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key});
@@ -38,6 +40,60 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Future<void> _loadProduct({required int productId}) async {
     product = await productService.getProductById(productId: productId);
     setState(() {});
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  TextSpan _buildLinkifiedText(String text) {
+    final RegExp linkRegExp = RegExp(r'(https?:\/\/[^\s]+)');
+    final List<InlineSpan> spans = [];
+
+    int lastIndex = 0;
+    for (final match in linkRegExp.allMatches(text)) {
+      if (match.start > lastIndex) {
+        spans.add(TextSpan(
+          text: text.substring(lastIndex, match.start),
+          style: GoogleFonts.poppins(
+            color: textBlack,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ));
+      }
+
+      final String url = match.group(0) ?? '';
+      spans.add(TextSpan(
+        text: url,
+        style: GoogleFonts.poppins(
+          color: textPrimary,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          decoration: TextDecoration.underline,
+        ),
+        recognizer: TapGestureRecognizer()
+          ..onTap = () => _launchUrl(url),
+      ));
+
+      lastIndex = match.end;
+    }
+
+    if (lastIndex < text.length) {
+      spans.add(TextSpan(
+        text: text.substring(lastIndex),
+        style: GoogleFonts.poppins(
+          color: textBlack,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ));
+    }
+
+    return TextSpan(children: spans);
   }
 
   @override
@@ -137,13 +193,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Text(
-                                  product!.description,
-                                  style: GoogleFonts.poppins(
-                                    color: textBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                Text.rich(
+                                  _buildLinkifiedText(product!.description),
                                 ),
                                 if (product!.descriptionImage != null &&
                                     product!.descriptionImage!.isNotEmpty)
@@ -201,13 +252,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Text(
-                                  product!.synthesis,
-                                  style: GoogleFonts.poppins(
-                                    color: textBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                Text.rich(
+                                  _buildLinkifiedText(product!.synthesis),
                                 ),
                                 if (product!.synthesisImage != null &&
                                     product!.synthesisImage!.isNotEmpty)
