@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quali_prevention_app/common/constant.dart';
 import 'package:quali_prevention_app/common/helper.dart';
 import 'package:quali_prevention_app/common/model/client_model.dart';
 import 'package:quali_prevention_app/common/style.dart';
@@ -101,6 +100,7 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                             backgroundImage: null,
                             backgroundColor:
                                 _statusColor(client?.statutName ?? ''),
+                            radius: 25,
                             child: Text(
                               _initials(
                                 client?.firstName ?? '',
@@ -111,7 +111,6 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            radius: 25,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,39 +294,42 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
     final normalized = status.toLowerCase();
 
     if (normalized.contains('prospect')) {
-      return secondary;
+      return darkGrey;
+    }
+
+    if (normalized.contains('signé') || normalized.contains('signe')) {
+      return const Color(0xFF2F52A9);
+    }
+
+    if (normalized.contains('en cours')) {
+      return const Color(0xFFF99B0C);
+    }
+
+    if (normalized.contains('déposé') || normalized.contains('depose')) {
+      return const Color(0xFF7BC87C);
     }
 
     if (normalized.contains('payé') || normalized.contains('paye')) {
-      return const Color(0xFF7FAF00);
+      return const Color(0xFF2E7D32);
     }
 
-    if (normalized.contains('abandon') ||
+    if (normalized.contains('clos') ||
+        normalized.contains('abandon') ||
         normalized.contains('refus') ||
         normalized.contains('annul') ||
         normalized.contains('non éligible') ||
         normalized.contains('non-eligible')) {
-      return Colors.red;
-    }
-
-    if (normalized.contains('signé') ||
-        normalized.contains('signe') ||
-        normalized.contains('déposé') ||
-        normalized.contains('depose') ||
-        normalized.contains('en cours')) {
-      return const Color(0xFFF99B0C);
+      return const Color(0xFFDC3545);
     }
 
     return grey;
   }
 
   String _initials(String firstName, String lastName) {
-    final first = firstName.trim().isNotEmpty
-        ? firstName.trim().characters.first
-        : '';
-    final last = lastName.trim().isNotEmpty
-        ? lastName.trim().characters.first
-        : '';
+    final first =
+        firstName.trim().isNotEmpty ? firstName.trim().characters.first : '';
+    final last =
+        lastName.trim().isNotEmpty ? lastName.trim().characters.first : '';
     final initials = '$first$last'.trim();
     return initials.isEmpty ? '?' : initials.toUpperCase();
   }

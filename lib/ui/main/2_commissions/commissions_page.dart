@@ -51,6 +51,7 @@ class _CommissionsPageState extends State<CommissionsPage>
       );
       allCommissions = await userService.getAllUserCommissions();
       allClients = await userService.getAllUserClients();
+      allClients = _sortClientsForFollowUp(allClients ?? []);
       clientAmountByYear = await userService.getClientAmountByYear(year: 2024);
       await _loadUserNetwork();
     } catch (e) {
@@ -670,21 +671,18 @@ class _CommissionsPageState extends State<CommissionsPage>
                                 spacing: 20,
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: (client.picture
-                                                .toString()
-                                                .isNotEmpty)
-                                        ? NetworkImage(
-                                            '${AppConstants.apiBaseUrl}${client.picture}',
-                                          )
-                                        : null,
-                                    backgroundColor: client.picture
-                                            .toString()
-                                            .isNotEmpty
-                                        ? grey
-                                        : _statusColor(client.statutName),
-                                    child: client.picture
-                                            .toString()
-                                            .isNotEmpty
+                                    backgroundImage:
+                                        (client.picture.toString().isNotEmpty)
+                                            ? NetworkImage(
+                                                '${AppConstants.apiBaseUrl}${client.picture}',
+                                              )
+                                            : null,
+                                    backgroundColor:
+                                        client.picture.toString().isNotEmpty
+                                            ? grey
+                                            : _statusColor(client.statutName),
+                                    radius: 25,
+                                    child: client.picture.toString().isNotEmpty
                                         ? null
                                         : Text(
                                             _initials(
@@ -696,7 +694,6 @@ class _CommissionsPageState extends State<CommissionsPage>
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                    radius: 25,
                                   ),
                                   Column(
                                     crossAxisAlignment:
@@ -996,39 +993,79 @@ class _CommissionsPageState extends State<CommissionsPage>
     final normalized = status.toLowerCase();
 
     if (normalized.contains('prospect')) {
-      return secondary;
+      return darkGrey;
+    }
+
+    if (normalized.contains('signé') || normalized.contains('signe')) {
+      return const Color(0xFF2F52A9);
+    }
+
+    if (normalized.contains('en cours')) {
+      return const Color(0xFFF99B0C);
+    }
+
+    if (normalized.contains('déposé') || normalized.contains('depose')) {
+      return const Color(0xFF7BC87C);
     }
 
     if (normalized.contains('payé') || normalized.contains('paye')) {
-      return const Color(0xFF7FAF00);
+      return const Color(0xFF2E7D32);
     }
 
-    if (normalized.contains('abandon') ||
+    if (normalized.contains('clos') ||
+        normalized.contains('abandon') ||
         normalized.contains('refus') ||
         normalized.contains('annul') ||
         normalized.contains('non éligible') ||
         normalized.contains('non-eligible')) {
-      return Colors.red;
-    }
-
-    if (normalized.contains('signé') ||
-        normalized.contains('signe') ||
-        normalized.contains('déposé') ||
-        normalized.contains('depose') ||
-        normalized.contains('en cours')) {
-      return const Color(0xFFF99B0C);
+      return const Color(0xFFDC3545);
     }
 
     return grey;
   }
 
+  List<Client> _sortClientsForFollowUp(List<Client> clients) {
+    int statusRank(String status) {
+      final normalized = status.toLowerCase();
+      if (normalized.contains('prospect')) return 1;
+      if (normalized.contains('signé') || normalized.contains('signe'))
+        return 2;
+      if (normalized.contains('en cours')) return 3;
+      if (normalized.contains('déposé') || normalized.contains('depose'))
+        return 4;
+      if (normalized.contains('payé') || normalized.contains('paye')) return 5;
+      if (normalized.contains('clos')) return 6;
+      if (normalized.contains('abandon') ||
+          normalized.contains('refus') ||
+          normalized.contains('annul') ||
+          normalized.contains('non éligible') ||
+          normalized.contains('non-eligible')) {
+        return 7;
+      }
+      return 6;
+    }
+
+    int nameCompare(Client a, Client b) {
+      final nameA = ('${a.firstName} ${a.lastName}').trim().toLowerCase();
+      final nameB = ('${b.firstName} ${b.lastName}').trim().toLowerCase();
+      return nameA.compareTo(nameB);
+    }
+
+    final sorted = List<Client>.from(clients);
+    sorted.sort((a, b) {
+      final rankA = statusRank(a.statutName);
+      final rankB = statusRank(b.statutName);
+      if (rankA != rankB) return rankA.compareTo(rankB);
+      return nameCompare(a, b);
+    });
+    return sorted;
+  }
+
   String _initials(String firstName, String lastName) {
-    final first = firstName.trim().isNotEmpty
-        ? firstName.trim().characters.first
-        : '';
-    final last = lastName.trim().isNotEmpty
-        ? lastName.trim().characters.first
-        : '';
+    final first =
+        firstName.trim().isNotEmpty ? firstName.trim().characters.first : '';
+    final last =
+        lastName.trim().isNotEmpty ? lastName.trim().characters.first : '';
     final initials = '$first$last'.trim();
     return initials.isEmpty ? '?' : initials.toUpperCase();
   }
