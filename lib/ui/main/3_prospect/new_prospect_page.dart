@@ -86,6 +86,12 @@ class _SignUpWidgetState extends State<NewProspectPage> {
 
   late bool optin;
 
+  bool get _hasRequiredProspectFields =>
+      lastNameController.text.trim().isNotEmpty &&
+      firstNameController.text.trim().isNotEmpty &&
+      emailController.text.trim().isNotEmpty &&
+      phoneController.text.trim().isNotEmpty;
+
   @override
   void initState() {
     super.initState();
@@ -194,7 +200,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                       icon: Icons.person,
                       onChanged: (value) {
                         setState(() {
-                          lastNameIsEmpty = value.isEmpty;
+                          lastNameIsEmpty = value.trim().isEmpty;
                         });
                       },
                       onUnfocus: () => lastNameFocusNode.unfocus(),
@@ -212,7 +218,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                       icon: Icons.person,
                       onChanged: (value) {
                         setState(() {
-                          firstNameIsEmpty = value.isEmpty;
+                          firstNameIsEmpty = value.trim().isEmpty;
                         });
                       },
                       onUnfocus: () => firstNameFocusNode.unfocus(),
@@ -230,7 +236,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                       icon: Icons.email,
                       onChanged: (value) {
                         setState(() {
-                          emailIsEmpty = value.isEmpty;
+                          emailIsEmpty = value.trim().isEmpty;
                         });
                       },
                       onUnfocus: () => emailFocusNode.unfocus(),
@@ -248,7 +254,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                       icon: Icons.phone,
                       onChanged: (value) {
                         setState(() {
-                          phoneIsEmpty = value.isEmpty;
+                          phoneIsEmpty = value.trim().isEmpty;
                         });
                       },
                       onUnfocus: () => phoneFocusNode.unfocus(),
@@ -560,10 +566,7 @@ class _SignUpWidgetState extends State<NewProspectPage> {
               ),
               const SizedBox(height: 20),
               CustomTextButton(
-                isEnabled: !lastNameIsEmpty &&
-                    !firstNameIsEmpty &&
-                    !emailIsEmpty &&
-                    !phoneIsEmpty &&
+                isEnabled: _hasRequiredProspectFields &&
                     /*!addressIsEmpty &&
                     !postalCodeIsEmpty &&
                     !cityIsEmpty &&
@@ -573,6 +576,28 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                     !commentIsEmpty &&*/
                     optin,
                 onPressed: () async {
+                  final lastNameText = lastNameController.text.trim();
+                  final firstNameText = firstNameController.text.trim();
+                  final emailText = emailController.text.trim();
+                  final phoneText = phoneController.text.trim();
+
+                  if (lastNameText.isEmpty ||
+                      firstNameText.isEmpty ||
+                      emailText.isEmpty ||
+                      phoneText.isEmpty) {
+                    await Fluttertoast.showToast(
+                      msg:
+                          'Nom, prenom, adresse e-mail et telephone sont obligatoires.',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.TOP,
+                      timeInSecForIosWeb: 3,
+                      backgroundColor: Colors.red,
+                      textColor: white,
+                      fontSize: 18.0,
+                    );
+                    return;
+                  }
+
                   final siretText = siretController.text.trim();
                   if (siretText.isNotEmpty && siretText.length != 14) {
                     await Fluttertoast.showToast(
@@ -588,24 +613,26 @@ class _SignUpWidgetState extends State<NewProspectPage> {
                   }
 
                   Prospect prospect = Prospect(
-                    lastName: lastNameController.text,
-                    firstName: firstNameController.text,
-                    email: emailController.text,
-                    mobilePhone: phoneController.text,
-                    companyName: companyNameController.text.isEmpty
+                    lastName: lastNameText,
+                    firstName: firstNameText,
+                    email: emailText,
+                    mobilePhone: phoneText,
+                    companyName: companyNameController.text.trim().isEmpty
                         ? null
-                        : companyNameController.text,
+                        : companyNameController.text.trim(),
                     siret: siretText.isEmpty ? null : siretText,
-                    companyActivity: companyActivityController.text.isEmpty
+                    companyActivity: companyActivityController.text
+                            .trim()
+                            .isEmpty
                         ? null
-                        : companyActivityController.text,
+                        : companyActivityController.text.trim(),
                     /*address: addressController.text,
                     postalCode: postalCodeController.text,
                     city: cityController.text,
                     surface: int.parse(surfaceController.text),
                     typeChauffage: items.indexOf(selectedValue!),
                     factureParAn: int.parse(annualAmountController.text),*/
-                    comment: commentController.text,
+                    comment: commentController.text.trim(),
                   );
                   print(prospect.toJson());
                   final result = await prospectService.createProspect(prospect);
