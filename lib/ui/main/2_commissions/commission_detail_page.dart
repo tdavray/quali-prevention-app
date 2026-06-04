@@ -201,22 +201,23 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 6),
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 6,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/svg/installation.svg',
-                                height: 20,
-                              ),
-                              Text.rich(
-                                style: const TextStyle(
+                          if (_showsUpcomingCommission(client)) ...[
+                            const SizedBox(height: 6),
+                            Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              spacing: 6,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/svg/installation.svg',
+                                  height: 20,
+                                ),
+                                Text.rich(
+                                  style: const TextStyle(
                                   color: Color(0xff434343),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                TextSpan(
+                                  TextSpan(
                                   children: [
                                     const TextSpan(
                                         text: 'Commissions à venir : '),
@@ -231,6 +232,7 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
                               ),
                             ],
                           ),
+                          ],
                           Divider(
                             height: 30,
                             color: grey,
@@ -323,6 +325,14 @@ class _CommissionDetailPageState extends State<CommissionDetailPage> {
     }
 
     return grey;
+  }
+
+  bool _showsUpcomingCommission(Client? client) {
+    if (client == null || client.commission == null) {
+      return false;
+    }
+
+    return client.commission!.toDouble() > 0;
   }
 
   String _initials(String firstName, String lastName) {
